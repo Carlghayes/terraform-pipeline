@@ -1,0 +1,9 @@
+# Terraform plugin cache — never commit this
+.terraform/
+
+# State files — contain sensitive info
+terraform.tfstate
+terraform.tfstate.backup
+
+# Variable files that may contain secrets
+*.tfvars
