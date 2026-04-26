@@ -1,6 +1,5 @@
 name: Deploy Infrastructure
 
-# Trigger on every push to main
 on:
   push:
     branches:
@@ -12,15 +11,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Pull down your code
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Install Terraform
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
-      # Authenticate to AWS using your GitHub Secrets
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
@@ -28,13 +24,10 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      # Initialize Terraform
       - name: Terraform init
         run: terraform init
 
-      # Deploy
       - name: Terraform apply
         run: terraform apply -auto-approve
         env:
-          TF_VAR_ssh_public_key: ${{ secrets.TF_VAR_SSH_PUBLIC_KEY}}
-          
+          TF_VAR_ssh_public_key: ${{ secrets.TF_SSH_PUBLIC_KEY }}
