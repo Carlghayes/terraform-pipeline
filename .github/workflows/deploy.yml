@@ -35,3 +35,6 @@ jobs:
       # Deploy
       - name: Terraform apply
         run: terraform apply -auto-approve
+        env:
+          TF_VAR_ssh_public_key: ${{ secrets.TF_VAR_SSH_PUBLIC_KEY}}
+          

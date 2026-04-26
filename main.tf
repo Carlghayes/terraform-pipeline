@@ -13,10 +13,16 @@ provider "aws" {
   region = "us-east-1"
 }
 
+# SSH public key passed in as a variable
+variable "ssh_public_key" {
+  description = "SSH public key"
+  type        = string
+}
+
 # Upload your public SSH key to AWS
 resource "aws_key_pair" "main" {
   key_name   = "terraform-key"
-  public_key = file("~/.ssh/terraform-key.pub")
+  public_key = var.ssh_public_key
 }
 
 # Security group — controls what traffic is allowed in and out
@@ -59,8 +65,8 @@ resource "aws_security_group" "main" {
 
 # The Ubuntu EC2 instance
 resource "aws_instance" "main" {
-  ami                    = "ami-0c7217cdde317cfec" # Ubuntu 22.04 us-east-1
-  instance_type          = "t2.micro"              # Free tier
+  ami                    = "ami-0c7217cdde317cfec"
+  instance_type          = "t2.micro"
   key_name               = aws_key_pair.main.key_name
   vpc_security_group_ids = [aws_security_group.main.id]
   user_data              = file("cloud-init.yml")
