@@ -69,7 +69,7 @@ resource "aws_instance" "main" {
   instance_type          = "t2.micro"
   key_name               = aws_key_pair.main.key_name
   vpc_security_group_ids = [aws_security_group.main.id]
-  user_data              = file("cloud-init.yml.tpl", {
+  user_data              = templatefile("cloud-init.yml.tpl", {
         ssh_public_key = var.ssh_public_key
   })
 
