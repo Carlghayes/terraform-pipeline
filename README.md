@@ -30,11 +30,10 @@ terraform-pipeline/
 │   └── workflows/
 │       └── deploy.yml        # GitHub Actions pipeline
 ├── main.tf                   # AWS infrastructure definition
-├── variables.tf              # Input variables
-├── outputs.tf                # Outputs public IP after deploy
 ├── cloud-init.yml.tpl        # Server hardening template
 ├── .gitignore                # Excludes Terraform cache and state files
 └── README.md
+```
 ```
 
 ---
