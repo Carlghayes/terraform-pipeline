@@ -1,16 +1,55 @@
+# Select your provider directory and run Terraform from within it:
+#
+#   cd providers/aws      → Amazon Web Services
+#   cd providers/azure    → Microsoft Azure
+#   cd providers/gcp      → Google Cloud Platform
+#   cd providers/vsphere  → VMware vCenter / vSphere
+#
+# Then copy this file into that directory and fill in the values:
+#   cp ../../terraform.tfvars.example terraform.tfvars
+
+# ------------------------------------------------------------
+# Common variables (all providers)
+# ------------------------------------------------------------
+
 # Your SSH public key (run: cat ~/.ssh/id_rsa.pub)
 ssh_public_key = "ssh-rsa AAAA..."
 
-# AMI ID for the instance (default is Ubuntu 22.04 in us-east-1)
-ami = "ami-0c7217cdde317cfec"
-
-# EC2 instance type
-instance_type = "t2.micro"
-
 # Inbound port rules — add or remove entries to open/close ports
-# Both the security group and the UFW firewall will update automatically
 ingress_rules = [
   { port = 22,  protocol = "tcp", cidr_blocks = ["0.0.0.0/0"], description = "SSH" },
   { port = 80,  protocol = "tcp", cidr_blocks = ["0.0.0.0/0"], description = "HTTP" },
   { port = 443, protocol = "tcp", cidr_blocks = ["0.0.0.0/0"], description = "HTTPS" }
 ]
+
+# ------------------------------------------------------------
+# AWS-specific variables
+# ------------------------------------------------------------
+ami           = "ami-0c7217cdde317cfec"  # Ubuntu 22.04 in us-east-1
+instance_type = "t2.micro"
+
+# ------------------------------------------------------------
+# Azure-specific variables
+# ------------------------------------------------------------
+# location            = "East US"
+# resource_group_name = "terraform-rg"
+# vm_size             = "Standard_B1s"
+
+# ------------------------------------------------------------
+# GCP-specific variables
+# ------------------------------------------------------------
+# project      = "your-gcp-project-id"
+# region       = "us-central1"
+# zone         = "us-central1-a"
+# machine_type = "e2-micro"
+
+# ------------------------------------------------------------
+# vSphere/vCenter-specific variables
+# ------------------------------------------------------------
+# vsphere_server   = "vcenter.example.com"
+# vsphere_user     = "administrator@vsphere.local"
+# vsphere_password = "your-password"
+# datacenter       = "your-datacenter"
+# datastore        = "your-datastore"
+# network          = "your-network"
+# host             = "your-host"
