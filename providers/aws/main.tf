@@ -12,13 +12,13 @@ provider "aws" {
 }
 
 module "security_group" {
-  source        = "./modules/security_group"
+  source        = "../../modules/aws/security_group"
   name          = "terraform-sg"
   ingress_rules = var.ingress_rules
 }
 
 module "compute" {
-  source            = "./modules/compute"
+  source            = "../../modules/aws/compute"
   ami               = var.ami
   instance_type     = var.instance_type
   ssh_public_key    = var.ssh_public_key

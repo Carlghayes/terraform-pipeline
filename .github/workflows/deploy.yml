@@ -25,9 +25,11 @@ jobs:
           aws-region: us-east-1
 
       - name: Terraform init
+        working-directory: providers/aws
         run: terraform init
 
       - name: Terraform apply
+        working-directory: providers/aws
         run: terraform apply -auto-approve
         env:
           TF_VAR_ssh_public_key: ${{ secrets.TF_SSH_PUBLIC_KEY }}
